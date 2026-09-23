@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import VisualizationGuide from "./VisualizationGuide";
+import PracticeDatasets from "./PracticeDatasets";
 import { updatePageSEO } from "./lib/seo";
 import {
   BookOpen,
@@ -704,6 +705,7 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
             <a href="#philosophy" className="hover:text-white transition-colors">Philosophy</a>
             <a href="#advantages" className="hover:text-white transition-colors">Architecture</a>
             <a href="#docs" className="hover:text-white transition-colors">Plain English</a>
+            <a href="#datasets" className="hover:text-white transition-colors">Datasets</a>
             <a href="#api" className="hover:text-white transition-colors">API Explorer</a>
             <button
               onClick={() => navigateTo("guide")}
@@ -1966,7 +1968,7 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
                         <span className="size-2 rounded-full bg-[#FFBD2E]/80" />
                         <span className="size-2 rounded-full bg-[#27C93F]/80" />
                       </div>
-                      <span>dashboard_grid.py</span>
+                      <span>dashboard.py</span>
                       <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-sans">
                         Full runnable file
                       </span>
@@ -2307,6 +2309,11 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
           )}
         </div>
       </section>
+
+      {/* ========================================================================= */}
+      {/* HANDS-ON PRACTICE DATASETS (#datasets) */}
+      {/* ========================================================================= */}
+      <PracticeDatasets onCopyToast={(msg) => setToastMessage(msg)} />
 
       {/* ========================================================================= */}
       {/* SEARCHABLE API REFERENCE EXPLORER (#api) */}
