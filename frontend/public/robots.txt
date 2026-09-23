@@ -1,0 +1,9 @@
+# Robots.txt for Darsh — https://darshdata.in
+User-agent: *
+Allow: /
+
+# Canonical Sitemap
+Sitemap: https://darshdata.in/sitemap.xml
+
+# Host declaration
+Host: https://darshdata.in

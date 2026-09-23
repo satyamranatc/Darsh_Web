@@ -1,13 +1,138 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en" class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%234F46E5'/><path d='M25 65 L45 35 L65 55 L80 25' stroke='white' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Darsh — Calm, Pythonic Charting & Dashboard Engine</title>
-    <meta name="description" content="A skin and convenience layer over pandas, matplotlib, and plotly. Effortless 1-liners for laymen, 100% technical editability for senior engineers." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    
+    <!-- Primary Title & Meta Description -->
+    <title>Darsh — Clean Data, Calm Charts | Modern Pythonic Charting Engine</title>
+    <meta name="description" content="The modern Pythonic visualization and reactive dashboard engine built on pandas, matplotlib, and plotly. Publication-grade figures in 1 line, zero proprietary silos, auditable data cleaning, and sub-5ms reactive web dashboards." />
+    <meta name="keywords" content="darsh, python charting, data visualization python, matplotlib alternative, seaborn alternative, pandas data cleaning, python dashboard, reactive fastapi dashboard, plotly 3d python, nordic calm palette, clean data calm charts, pythonic plotting, pypi darsh" />
+    <meta name="author" content="Satyam Rana" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://darshdata.in/" id="canonical-url" />
+
+    <!-- Web App & Theme Color -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Darsh" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://darshdata.in/" />
+    <meta property="og:title" content="Darsh — Clean Data, Calm Charts | Modern Pythonic Charting Engine" />
+    <meta property="og:description" content="The modern Pythonic charting and reactive dashboard engine built on pandas, matplotlib, and plotly. Publication-grade figures in 1 line with zero proprietary silos." />
+    <meta property="og:image" content="https://darshdata.in/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Darsh — Clean data. Calm charts." />
+    <meta property="og:site_name" content="Darsh" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://darshdata.in/" />
+    <meta name="twitter:title" content="Darsh — Clean Data, Calm Charts" />
+    <meta name="twitter:description" content="Publication-grade figures in 1 line. Built on pandas, matplotlib, and plotly with zero proprietary silos." />
+    <meta name="twitter:image" content="https://darshdata.in/og-image.svg" />
+    <meta name="twitter:creator" content="@satyamranatc" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" id="seo-static-jsonld">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://darshdata.in/#software",
+          "name": "Darsh",
+          "operatingSystem": "Linux, macOS, Windows",
+          "applicationCategory": "DeveloperApplication",
+          "softwareVersion": "2.0.1",
+          "description": "Clean data. Calm charts. The modern Pythonic charting and dashboard engine built on pandas, matplotlib, and plotly with zero proprietary silos.",
+          "downloadUrl": "https://pypi.org/project/darsh/2.0.1/",
+          "installUrl": "https://pypi.org/project/darsh/",
+          "programmingLanguage": "Python",
+          "offers": {
+            "@type": "Offer",
+            "price": "0.00",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Satyam Rana",
+            "url": "https://github.com/satyamranatc"
+          },
+          "license": "https://opensource.org/licenses/MIT"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://darshdata.in/#website",
+          "url": "https://darshdata.in/",
+          "name": "Darsh Data",
+          "description": "Official documentation and studio for Darsh Python visualization library.",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://darshdata.in/#api?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://darshdata.in/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Darsh in Python?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Darsh is an opinionated, calm Python charting and dashboard engine built on top of pandas, matplotlib, and plotly. It produces publication-grade graphics from plain Python lists, dictionaries, or DataFrames with zero boilerplate."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Darsh trap users behind proprietary chart objects?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Darsh has a strict Zero Lock-in guarantee: 2D functions return genuine matplotlib.axes.Axes objects, and 3D or interactive calls return native plotly.graph_objects.Figure instances. All standard custom matplotlib formatters, plt.savefig(), and annotations work seamlessly."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does Darsh handle data cleaning?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Darsh registers an auditable pandas accessor (df.darsh.*). You can chain df.darsh.clean_names(), drop_duplicates(), fill_missing(strategy='smart'), and calculate an objective 0-100 data hygiene rating via df.darsh.quality_score()."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How can I deploy a live dashboard with Darsh?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Calling darsh.dashboard(title, charts, data, kpis) launches a high-speed local FastAPI web server on port 8080 with interactive cross-filters and dynamic SVG stream updates serving under 5ms."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
-  <body class="bg-black text-white antialiased selection:bg-indigo-500/30 selection:text-indigo-200">
+  <body class="bg-black text-white antialiased selection:bg-indigo-500/30 selection:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

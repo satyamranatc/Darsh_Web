@@ -1,0 +1,16 @@
+{
+  "name": "Darsh — Calm, Pythonic Charting & Dashboard Engine",
+  "short_name": "Darsh",
+  "description": "The modern Pythonic visualization and dashboard engine built on pandas, matplotlib, and plotly with zero proprietary silos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
