@@ -54,6 +54,148 @@ export default function App() {
     setTimeout(() => setCopiedKey(null), 2000);
   };
 
+  const plainEnglishSnippets = {
+    line: `import darsh
+import matplotlib.pyplot as plt
+
+# 1. Sample data: Weekly active metric
+weekly_data = [12, 28, 19, 45, 62, 58]
+
+# 2. Render publication-grade line chart in 1 call
+ax = darsh.line(weekly_data, title="Weekly Growth")
+
+# 3. Display chart (or save: ax.figure.savefig("growth.png"))
+plt.show()`,
+
+    bar: `import darsh
+import matplotlib.pyplot as plt
+
+# 1. Sample data: Team performance metrics
+team_scores = {
+    "Design": 92,
+    "Engineering": 96,
+    "Product": 88
+}
+
+# 2. Render sorted bar chart (pass horizontal=True for horizontal layout)
+ax = darsh.bar(team_scores, title="Team Performance")
+
+# 3. Display chart
+plt.show()`,
+
+    donut: `import darsh
+import matplotlib.pyplot as plt
+
+# 1. Sample data: Revenue breakdown proportions
+revenue_mix = {
+    "Cloud": 60,
+    "Hardware": 25,
+    "Services": 15
+}
+
+# 2. Render modern hollow donut chart
+ax = darsh.donut(revenue_mix, title="Revenue Mix")
+
+# 3. Display chart
+plt.show()`,
+
+    grid: `import darsh
+import pandas as pd
+
+# 1. Sample business metrics DataFrame
+df = pd.DataFrame({
+    "date": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+    "channel": ["Direct", "Search", "Social", "Referral", "Email"],
+    "revenue": [12000, 18500, 14200, 22000, 28000]
+})
+
+# 2. Create executive metric cards
+card1 = darsh.card("Total ARR", "$4.2M", delta="+14.2%")
+card2 = darsh.card("Net Profit", "$1.8M", delta="+8.6%")
+
+# 3. Create subcharts
+c1 = darsh.line(df, x="date", y="revenue", title="Revenue Trend")
+c2 = darsh.bar(df, x="channel", y="revenue", title="Channel Split")
+
+# 4. Group into a responsive auto-balanced grid
+dashboard = darsh.grid([card1, card2, c1, c2], cols=2)
+
+# 5. Export to standalone HTML file (or inspect in Jupyter notebooks)
+dashboard.save_html("dashboard.html")
+print("Dashboard exported successfully to dashboard.html")`,
+
+    inter: `import darsh
+import pandas as pd
+
+# 1. Sample metrics DataFrame
+df = pd.DataFrame({
+    "date": ["2024-Q1", "2024-Q2", "2024-Q3", "2024-Q4"],
+    "revenue": [120, 185, 210, 290],
+    "profit": [35, 55, 62, 95],
+    "units": [450, 710, 830, 1150]
+})
+
+# 2. Interactive 2D chart with hover inspection
+fig_2d = darsh.line(df, x="date", y="revenue", interactive=True)
+fig_2d.show()
+
+# 3. Interactive 3D spatial scatter with camera rotation
+fig_3d = darsh.scatter_3d(df, x="revenue", y="profit", z="units", title="3D Performance Space")
+fig_3d.show()`,
+
+    clean: `import darsh
+import pandas as pd
+
+# 1. Messy real-world sample DataFrame
+raw_df = pd.DataFrame({
+    "Customer Name ": ["Alice", "Bob", "Alice", "Charlie"],
+    "Annual Rev ($)": [120000, None, 120000, 85000],
+    "Join Date": ["2023-01-15", "2023-03-20", "2023-01-15", "2023-06-10"]
+})
+
+# 2. Clean, deduplicate, and impute in one chain
+clean_df = (
+    raw_df
+    .darsh.clean_names()                   # Normalizes column headers to snake_case
+    .darsh.drop_duplicates()               # Eliminates duplicate records
+    .darsh.fill_missing(strategy="smart")  # Imputes numeric medians & categorical modes
+    .darsh.infer_types()                   # Casts dates and numerical types automatically
+)
+
+# 3. Calculate objective data health score (0-100)
+score = clean_df.darsh.quality_score()
+print(f"Data Health Score: {score:.1f} / 100")
+print(clean_df)`,
+
+    dash: `import darsh
+import pandas as pd
+
+# 1. Sample business data
+df = pd.DataFrame({
+    "month": ["Jan", "Feb", "Mar", "Apr", "May"],
+    "channel": ["Online", "Retail", "Online", "Retail", "Online"],
+    "revenue": [42000, 31000, 58000, 49000, 63000]
+})
+
+# 2. Create charts to embed in dashboard
+c1 = darsh.line(df, x="month", y="revenue", title="Revenue Growth")
+c2 = darsh.bar(df, x="channel", y="revenue", title="Channel Breakdown")
+
+# 3. Initialize reactive dashboard portal
+app = darsh.dashboard(
+    title="Executive Portal",
+    charts=[c1, c2],
+    data=df,
+    kpis=[
+        darsh.kpi("Total Revenue", "$243K", delta="+18.4%"),
+        darsh.kpi("Active Channels", "2", delta="Stable")
+    ]
+)
+
+# 4. Launch local high-speed web server (opens browser at localhost:8080)
+app.run(port=8080)`
+  };
+
   if (view === "guide") {
     return <VisualizationGuide onBack={() => navigateTo("home")} />;
   }
@@ -771,14 +913,14 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
 
           <p className="text-base sm:text-lg text-neutral-400 leading-relaxed font-normal max-w-2xl mx-auto">
             No confusing data science jargon. Real everyday use cases with styled code,
-            clear layman explanations, and visual previews of the exact result.
+            clear layman explanations, and visual previews. Every code block is fully runnable with sample data and necessary imports included.
           </p>
         </div>
 
-        {/* Category Filter Pills (Simple, supportive, non-interactive reading filters) */}
+        {/* Category Filter Pills */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-16 max-w-4xl mx-auto">
           {[
-            { id: "all", label: "All Guides (9)" },
+            { id: "all", label: "All Guides (7)" },
             { id: "everyday", label: "Everyday Charts" },
             { id: "executive", label: "Cards & Grids" },
             { id: "interactive", label: "Interactive & 3D" },
@@ -833,21 +975,29 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
                 {/* Code Window */}
                 <div className="lg:col-span-7 rounded-2xl bg-black border border-white/[0.08] overflow-hidden">
                   <div className="px-4 py-2.5 bg-white/[0.02] border-b border-white/[0.06] flex items-center justify-between text-xs font-mono text-neutral-500">
-                    <span>example.py</span>
+                    <div className="flex items-center gap-2">
+                      <span>line_chart.py</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-sans">
+                        Full runnable file
+                      </span>
+                    </div>
                     <button
-                      onClick={() => copyToClipboard("import darsh\n\n# 1-liner line chart from a plain list\nax = darsh.line([12, 28, 19, 45, 62, 58], title=\"Weekly Growth\")", "doc-line")}
-                      className="hover:text-white flex items-center gap-1.5 transition-colors"
+                      onClick={() => copyToClipboard(plainEnglishSnippets.line, "doc-line")}
+                      className="hover:text-white flex items-center gap-1.5 transition-colors font-sans text-xs"
                     >
                       {copiedKey === "doc-line" ? <Check className="size-3.5 text-emerald-400" /> : <Copy className="size-3.5" />}
-                      <span>{copiedKey === "doc-line" ? "Copied" : "Copy"}</span>
+                      <span>{copiedKey === "doc-line" ? "Copied Full Code" : "Copy Full Code"}</span>
                     </button>
                   </div>
                   <div className="p-5 font-mono text-[13px] leading-relaxed">
                     <div><span className="text-purple-400">import</span> <span className="text-white">darsh</span></div>
-                    <div className="mt-2 text-neutral-500"># Pass any plain Python list directly — zero boilerplate!</div>
-                    <div><span className="text-white">ax</span> = <span className="text-sky-300">darsh.line</span>([<span className="text-amber-300">12</span>, <span className="text-amber-300">28</span>, <span className="text-amber-300">19</span>, <span className="text-amber-300">45</span>, <span className="text-amber-300">62</span>, <span className="text-amber-300">58</span>], <span className="text-neutral-400">title</span>=<span className="text-emerald-300">"Weekly Growth"</span>)</div>
-                    <div className="mt-2 text-neutral-500"># Want to save it to disk? Standard matplotlib works 100%:</div>
-                    <div><span className="text-white">ax.figure.</span><span className="text-sky-300">savefig</span>(<span className="text-emerald-300">"growth.png"</span>)</div>
+                    <div><span className="text-purple-400">import</span> <span className="text-white">matplotlib.pyplot</span> <span className="text-purple-400">as</span> <span className="text-white">plt</span></div>
+                    <div className="mt-2 text-neutral-500"># 1. Sample data: Weekly active metric</div>
+                    <div><span className="text-white">weekly_data</span> = [<span className="text-amber-300">12</span>, <span className="text-amber-300">28</span>, <span className="text-amber-300">19</span>, <span className="text-amber-300">45</span>, <span className="text-amber-300">62</span>, <span className="text-amber-300">58</span>]</div>
+                    <div className="mt-2 text-neutral-500"># 2. Render publication-grade line chart in 1 call</div>
+                    <div><span className="text-white">ax</span> = <span className="text-sky-300">darsh.line</span>(<span className="text-white">weekly_data</span>, <span className="text-neutral-400">title</span>=<span className="text-emerald-300">"Weekly Growth"</span>)</div>
+                    <div className="mt-2 text-neutral-500"># 3. Display chart (or save: ax.figure.savefig("growth.png"))</div>
+                    <div><span className="text-white">plt.</span><span className="text-sky-300">show</span>()</div>
                   </div>
                 </div>
 
@@ -916,24 +1066,33 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
                 {/* Code Window */}
                 <div className="lg:col-span-7 rounded-2xl bg-black border border-white/[0.08] overflow-hidden">
                   <div className="px-4 py-2.5 bg-white/[0.02] border-b border-white/[0.06] flex items-center justify-between text-xs font-mono text-neutral-500">
-                    <span>example.py</span>
+                    <div className="flex items-center gap-2">
+                      <span>bar_chart.py</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-sans">
+                        Full runnable file
+                      </span>
+                    </div>
                     <button
-                      onClick={() => copyToClipboard("import darsh\n\n# 1-liner bar chart directly from a Python dictionary\ndarsh.bar({\"Design\": 92, \"Engineering\": 96, \"Product\": 88}, title=\"Team Scores\")", "doc-bar")}
-                      className="hover:text-white flex items-center gap-1.5 transition-colors"
+                      onClick={() => copyToClipboard(plainEnglishSnippets.bar, "doc-bar")}
+                      className="hover:text-white flex items-center gap-1.5 transition-colors font-sans text-xs"
                     >
                       {copiedKey === "doc-bar" ? <Check className="size-3.5 text-emerald-400" /> : <Copy className="size-3.5" />}
-                      <span>{copiedKey === "doc-bar" ? "Copied" : "Copy"}</span>
+                      <span>{copiedKey === "doc-bar" ? "Copied Full Code" : "Copy Full Code"}</span>
                     </button>
                   </div>
                   <div className="p-5 font-mono text-[13px] leading-relaxed">
                     <div><span className="text-purple-400">import</span> <span className="text-white">darsh</span></div>
-                    <div className="mt-2 text-neutral-500"># Pass a dictionary of category: score</div>
-                    <div><span className="text-sky-300">darsh.bar</span>({'{'}</div>
+                    <div><span className="text-purple-400">import</span> <span className="text-white">matplotlib.pyplot</span> <span className="text-purple-400">as</span> <span className="text-white">plt</span></div>
+                    <div className="mt-2 text-neutral-500"># 1. Sample data: Team performance metrics</div>
+                    <div><span className="text-white">team_scores</span> = {'{'}</div>
                     <div className="pl-4"><span className="text-emerald-300">"Design"</span>: <span className="text-amber-300">92</span>,</div>
                     <div className="pl-4"><span className="text-emerald-300">"Engineering"</span>: <span className="text-amber-300">96</span>,</div>
                     <div className="pl-4"><span className="text-emerald-300">"Product"</span>: <span className="text-amber-300">88</span></div>
-                    <div>{'}'}, <span className="text-neutral-400">title</span>=<span className="text-emerald-300">"Team Performance"</span>)</div>
-                    <div className="mt-2 text-neutral-500"># Tip: pass horizontal=True for long labels!</div>
+                    <div>{'}'}</div>
+                    <div className="mt-2 text-neutral-500"># 2. Render sorted bar chart (pass horizontal=True for horizontal layout)</div>
+                    <div><span className="text-white">ax</span> = <span className="text-sky-300">darsh.bar</span>(<span className="text-white">team_scores</span>, <span className="text-neutral-400">title</span>=<span className="text-emerald-300">"Team Performance"</span>)</div>
+                    <div className="mt-2 text-neutral-500"># 3. Display chart</div>
+                    <div><span className="text-white">plt.</span><span className="text-sky-300">show</span>()</div>
                   </div>
                 </div>
 
@@ -998,23 +1157,33 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
                 {/* Code Window */}
                 <div className="lg:col-span-7 rounded-2xl bg-black border border-white/[0.08] overflow-hidden">
                   <div className="px-4 py-2.5 bg-white/[0.02] border-b border-white/[0.06] flex items-center justify-between text-xs font-mono text-neutral-500">
-                    <span>example.py</span>
+                    <div className="flex items-center gap-2">
+                      <span>donut_chart.py</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-sans">
+                        Full runnable file
+                      </span>
+                    </div>
                     <button
-                      onClick={() => copyToClipboard("import darsh\n\n# Modern donut chart with calm colors\ndarsh.donut({\"Cloud\": 60, \"Hardware\": 25, \"Consulting\": 15}, title=\"Revenue Mix\")", "doc-donut")}
-                      className="hover:text-white flex items-center gap-1.5 transition-colors"
+                      onClick={() => copyToClipboard(plainEnglishSnippets.donut, "doc-donut")}
+                      className="hover:text-white flex items-center gap-1.5 transition-colors font-sans text-xs"
                     >
                       {copiedKey === "doc-donut" ? <Check className="size-3.5 text-emerald-400" /> : <Copy className="size-3.5" />}
-                      <span>{copiedKey === "doc-donut" ? "Copied" : "Copy"}</span>
+                      <span>{copiedKey === "doc-donut" ? "Copied Full Code" : "Copy Full Code"}</span>
                     </button>
                   </div>
                   <div className="p-5 font-mono text-[13px] leading-relaxed">
                     <div><span className="text-purple-400">import</span> <span className="text-white">darsh</span></div>
-                    <div className="mt-2 text-neutral-500"># Clean percentage proportions from dict</div>
-                    <div><span className="text-sky-300">darsh.donut</span>({'{'}</div>
+                    <div><span className="text-purple-400">import</span> <span className="text-white">matplotlib.pyplot</span> <span className="text-purple-400">as</span> <span className="text-white">plt</span></div>
+                    <div className="mt-2 text-neutral-500"># 1. Sample data: Revenue breakdown proportions</div>
+                    <div><span className="text-white">revenue_mix</span> = {'{'}</div>
                     <div className="pl-4"><span className="text-emerald-300">"Cloud"</span>: <span className="text-amber-300">60</span>,</div>
                     <div className="pl-4"><span className="text-emerald-300">"Hardware"</span>: <span className="text-amber-300">25</span>,</div>
                     <div className="pl-4"><span className="text-emerald-300">"Services"</span>: <span className="text-amber-300">15</span></div>
-                    <div>{'}'}, <span className="text-neutral-400">title</span>=<span className="text-emerald-300">"Revenue Mix"</span>)</div>
+                    <div>{'}'}</div>
+                    <div className="mt-2 text-neutral-500"># 2. Render modern hollow donut chart</div>
+                    <div><span className="text-white">ax</span> = <span className="text-sky-300">darsh.donut</span>(<span className="text-white">revenue_mix</span>, <span className="text-neutral-400">title</span>=<span className="text-emerald-300">"Revenue Mix"</span>)</div>
+                    <div className="mt-2 text-neutral-500"># 3. Display chart</div>
+                    <div><span className="text-white">plt.</span><span className="text-sky-300">show</span>()</div>
                   </div>
                 </div>
 
@@ -1073,22 +1242,39 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
                 {/* Code Window */}
                 <div className="lg:col-span-7 rounded-2xl bg-black border border-white/[0.08] overflow-hidden">
                   <div className="px-4 py-2.5 bg-white/[0.02] border-b border-white/[0.06] flex items-center justify-between text-xs font-mono text-neutral-500">
-                    <span>dashboard.py</span>
+                    <div className="flex items-center gap-2">
+                      <span>dashboard_grid.py</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-sans">
+                        Full runnable file
+                      </span>
+                    </div>
                     <button
-                      onClick={() => copyToClipboard("card1 = darsh.card(\"Total ARR\", \"$4.2M\", delta=\"+14.2%\")\ncard2 = darsh.card(\"Profit\", \"$1.8M\", delta=\"+8.6%\")\n\nc1 = darsh.line(df, x=\"date\", y=\"revenue\")\nc2 = darsh.bar(df, x=\"channel\", y=\"revenue\")\n\n# Put them together in a responsive grid\ngrid = darsh.grid([card1, card2, c1, c2], cols=2)", "doc-grid")}
-                      className="hover:text-white flex items-center gap-1.5 transition-colors"
+                      onClick={() => copyToClipboard(plainEnglishSnippets.grid, "doc-grid")}
+                      className="hover:text-white flex items-center gap-1.5 transition-colors font-sans text-xs"
                     >
                       {copiedKey === "doc-grid" ? <Check className="size-3.5 text-emerald-400" /> : <Copy className="size-3.5" />}
-                      <span>{copiedKey === "doc-grid" ? "Copied" : "Copy"}</span>
+                      <span>{copiedKey === "doc-grid" ? "Copied Full Code" : "Copy Full Code"}</span>
                     </button>
                   </div>
                   <div className="p-5 font-mono text-[13px] leading-relaxed">
-                    <div className="text-neutral-500"># 1. Create executive metric cards</div>
+                    <div><span className="text-purple-400">import</span> <span className="text-white">darsh</span></div>
+                    <div><span className="text-purple-400">import</span> <span className="text-white">pandas</span> <span className="text-purple-400">as</span> <span className="text-white">pd</span></div>
+                    <div className="mt-2 text-neutral-500"># 1. Sample business metrics DataFrame</div>
+                    <div><span className="text-white">df</span> = <span className="text-white">pd.</span><span className="text-sky-300">DataFrame</span>({'{'}</div>
+                    <div className="pl-4"><span className="text-emerald-300">"date"</span>: [<span className="text-emerald-300">"Mon"</span>, <span className="text-emerald-300">"Tue"</span>, <span className="text-emerald-300">"Wed"</span>, <span className="text-emerald-300">"Thu"</span>, <span className="text-emerald-300">"Fri"</span>],</div>
+                    <div className="pl-4"><span className="text-emerald-300">"channel"</span>: [<span className="text-emerald-300">"Direct"</span>, <span className="text-emerald-300">"Search"</span>, <span className="text-emerald-300">"Social"</span>, <span className="text-emerald-300">"Referral"</span>, <span className="text-emerald-300">"Email"</span>],</div>
+                    <div className="pl-4"><span className="text-emerald-300">"revenue"</span>: [<span className="text-amber-300">12000</span>, <span className="text-amber-300">18500</span>, <span className="text-amber-300">14200</span>, <span className="text-amber-300">22000</span>, <span className="text-amber-300">28000</span>]</div>
+                    <div>{'}'})</div>
+                    <div className="mt-2 text-neutral-500"># 2. Create executive metric cards</div>
                     <div><span className="text-white">card1</span> = <span className="text-sky-300">darsh.card</span>(<span className="text-emerald-300">"Total ARR"</span>, <span className="text-emerald-300">"$4.2M"</span>, <span className="text-neutral-400">delta</span>=<span className="text-emerald-300">"+14.2%"</span>)</div>
                     <div><span className="text-white">card2</span> = <span className="text-sky-300">darsh.card</span>(<span className="text-emerald-300">"Net Profit"</span>, <span className="text-emerald-300">"$1.8M"</span>, <span className="text-neutral-400">delta</span>=<span className="text-emerald-300">"+8.6%"</span>)</div>
-                    <div className="mt-2 text-neutral-500"># 2. Group cards and charts into one responsive grid</div>
+                    <div className="mt-2 text-neutral-500"># 3. Create subcharts</div>
+                    <div><span className="text-white">c1</span> = <span className="text-sky-300">darsh.line</span>(<span className="text-white">df</span>, <span className="text-neutral-400">x</span>=<span className="text-emerald-300">"date"</span>, <span className="text-neutral-400">y</span>=<span className="text-emerald-300">"revenue"</span>, <span className="text-neutral-400">title</span>=<span className="text-emerald-300">"Revenue Trend"</span>)</div>
+                    <div><span className="text-white">c2</span> = <span className="text-sky-300">darsh.bar</span>(<span className="text-white">df</span>, <span className="text-neutral-400">x</span>=<span className="text-emerald-300">"channel"</span>, <span className="text-neutral-400">y</span>=<span className="text-emerald-300">"revenue"</span>, <span className="text-neutral-400">title</span>=<span className="text-emerald-300">"Channel Split"</span>)</div>
+                    <div className="mt-2 text-neutral-500"># 4. Group into responsive auto-balanced grid</div>
                     <div><span className="text-white">dashboard</span> = <span className="text-sky-300">darsh.grid</span>([<span className="text-white">card1, card2, c1, c2</span>], <span className="text-neutral-400">cols</span>=<span className="text-amber-300">2</span>)</div>
-                    <div className="mt-1 text-neutral-500"># In Jupyter: simply type 'dashboard' to see it!</div>
+                    <div className="mt-2 text-neutral-500"># 5. Export to HTML (or view in Jupyter)</div>
+                    <div><span className="text-white">dashboard.</span><span className="text-sky-300">save_html</span>(<span className="text-emerald-300">"dashboard.html"</span>)</div>
                   </div>
                 </div>
 
@@ -1163,21 +1349,35 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
                 {/* Code Window */}
                 <div className="lg:col-span-7 rounded-2xl bg-black border border-white/[0.08] overflow-hidden">
                   <div className="px-4 py-2.5 bg-white/[0.02] border-b border-white/[0.06] flex items-center justify-between text-xs font-mono text-neutral-500">
-                    <span>interactive.py</span>
+                    <div className="flex items-center gap-2">
+                      <span>interactive_3d.py</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-sans">
+                        Full runnable file
+                      </span>
+                    </div>
                     <button
-                      onClick={() => copyToClipboard("# 2D interactive chart\nfig = darsh.line(df, x=\"date\", y=\"revenue\", interactive=True)\nfig.show()\n\n# 3D spatial scatter\nfig_3d = darsh.scatter_3d(df, x=\"revenue\", y=\"profit\", z=\"units\")\nfig_3d.show()", "doc-inter")}
-                      className="hover:text-white flex items-center gap-1.5 transition-colors"
+                      onClick={() => copyToClipboard(plainEnglishSnippets.inter, "doc-inter")}
+                      className="hover:text-white flex items-center gap-1.5 transition-colors font-sans text-xs"
                     >
                       {copiedKey === "doc-inter" ? <Check className="size-3.5 text-emerald-400" /> : <Copy className="size-3.5" />}
-                      <span>{copiedKey === "doc-inter" ? "Copied" : "Copy"}</span>
+                      <span>{copiedKey === "doc-inter" ? "Copied Full Code" : "Copy Full Code"}</span>
                     </button>
                   </div>
                   <div className="p-5 font-mono text-[13px] leading-relaxed">
-                    <div className="text-neutral-500"># Just add interactive=True!</div>
-                    <div><span className="text-white">fig</span> = <span className="text-sky-300">darsh.line</span>(<span className="text-white">df</span>, <span className="text-neutral-400">x</span>=<span className="text-emerald-300">"date"</span>, <span className="text-neutral-400">y</span>=<span className="text-emerald-300">"revenue"</span>, <span className="text-neutral-400">interactive</span>=<span className="text-purple-400">True</span>)</div>
-                    <div><span className="text-white">fig.</span><span className="text-sky-300">show</span>()</div>
-                    <div className="mt-3 text-neutral-500"># 3D Point Cloud with camera rotation</div>
-                    <div><span className="text-white">fig_3d</span> = <span className="text-sky-300">darsh.scatter_3d</span>(<span className="text-white">df</span>, <span className="text-neutral-400">x</span>=<span className="text-emerald-300">"rev"</span>, <span className="text-neutral-400">y</span>=<span className="text-emerald-300">"profit"</span>, <span className="text-neutral-400">z</span>=<span className="text-emerald-300">"units"</span>)</div>
+                    <div><span className="text-purple-400">import</span> <span className="text-white">darsh</span></div>
+                    <div><span className="text-purple-400">import</span> <span className="text-white">pandas</span> <span className="text-purple-400">as</span> <span className="text-white">pd</span></div>
+                    <div className="mt-2 text-neutral-500"># 1. Sample metrics DataFrame</div>
+                    <div><span className="text-white">df</span> = <span className="text-white">pd.</span><span className="text-sky-300">DataFrame</span>({'{'}</div>
+                    <div className="pl-4"><span className="text-emerald-300">"date"</span>: [<span className="text-emerald-300">"2024-Q1"</span>, <span className="text-emerald-300">"2024-Q2"</span>, <span className="text-emerald-300">"2024-Q3"</span>, <span className="text-emerald-300">"2024-Q4"</span>],</div>
+                    <div className="pl-4"><span className="text-emerald-300">"revenue"</span>: [<span className="text-amber-300">120</span>, <span className="text-amber-300">185</span>, <span className="text-amber-300">210</span>, <span className="text-amber-300">290</span>],</div>
+                    <div className="pl-4"><span className="text-emerald-300">"profit"</span>: [<span className="text-amber-300">35</span>, <span className="text-amber-300">55</span>, <span className="text-amber-300">62</span>, <span className="text-amber-300">95</span>],</div>
+                    <div className="pl-4"><span className="text-emerald-300">"units"</span>: [<span className="text-amber-300">450</span>, <span className="text-amber-300">710</span>, <span className="text-amber-300">830</span>, <span className="text-amber-300">1150</span>]</div>
+                    <div>{'}'})</div>
+                    <div className="mt-2 text-neutral-500"># 2. Interactive 2D chart with hover inspection</div>
+                    <div><span className="text-white">fig_2d</span> = <span className="text-sky-300">darsh.line</span>(<span className="text-white">df</span>, <span className="text-neutral-400">x</span>=<span className="text-emerald-300">"date"</span>, <span className="text-neutral-400">y</span>=<span className="text-emerald-300">"revenue"</span>, <span className="text-neutral-400">interactive</span>=<span className="text-purple-400">True</span>)</div>
+                    <div><span className="text-white">fig_2d.</span><span className="text-sky-300">show</span>()</div>
+                    <div className="mt-2 text-neutral-500"># 3. Interactive 3D spatial scatter with camera rotation</div>
+                    <div><span className="text-white">fig_3d</span> = <span className="text-sky-300">darsh.scatter_3d</span>(<span className="text-white">df</span>, <span className="text-neutral-400">x</span>=<span className="text-emerald-300">"revenue"</span>, <span className="text-neutral-400">y</span>=<span className="text-emerald-300">"profit"</span>, <span className="text-neutral-400">z</span>=<span className="text-emerald-300">"units"</span>, <span className="text-neutral-400">title</span>=<span className="text-emerald-300">"3D Performance Space"</span>)</div>
                     <div><span className="text-white">fig_3d.</span><span className="text-sky-300">show</span>()</div>
                   </div>
                 </div>
@@ -1234,25 +1434,41 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
                 {/* Code Window */}
                 <div className="lg:col-span-7 rounded-2xl bg-black border border-white/[0.08] overflow-hidden">
                   <div className="px-4 py-2.5 bg-white/[0.02] border-b border-white/[0.06] flex items-center justify-between text-xs font-mono text-neutral-500">
-                    <span>clean_data.py</span>
+                    <div className="flex items-center gap-2">
+                      <span>clean_data.py</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-sans">
+                        Full runnable file
+                      </span>
+                    </div>
                     <button
-                      onClick={() => copyToClipboard("clean_df = (\n    raw_df\n    .darsh.clean_names()               # 'Annual Rev ($)' -> 'annual_rev'\n    .darsh.drop_duplicates()           # Removes ghost rows\n    .darsh.fill_missing(strategy='smart') # Median/Mode auto-fill\n    .darsh.infer_types()               # Casts dates and numbers\n)\n\nscore = clean_df.darsh.quality_score() # e.g. 98.4", "doc-clean")}
-                      className="hover:text-white flex items-center gap-1.5 transition-colors"
+                      onClick={() => copyToClipboard(plainEnglishSnippets.clean, "doc-clean")}
+                      className="hover:text-white flex items-center gap-1.5 transition-colors font-sans text-xs"
                     >
                       {copiedKey === "doc-clean" ? <Check className="size-3.5 text-emerald-400" /> : <Copy className="size-3.5" />}
-                      <span>{copiedKey === "doc-clean" ? "Copied" : "Copy"}</span>
+                      <span>{copiedKey === "doc-clean" ? "Copied Full Code" : "Copy Full Code"}</span>
                     </button>
                   </div>
                   <div className="p-5 font-mono text-[13px] leading-relaxed">
+                    <div><span className="text-purple-400">import</span> <span className="text-white">darsh</span></div>
+                    <div><span className="text-purple-400">import</span> <span className="text-white">pandas</span> <span className="text-purple-400">as</span> <span className="text-white">pd</span></div>
+                    <div className="mt-2 text-neutral-500"># 1. Messy real-world sample DataFrame</div>
+                    <div><span className="text-white">raw_df</span> = <span className="text-white">pd.</span><span className="text-sky-300">DataFrame</span>({'{'}</div>
+                    <div className="pl-4"><span className="text-emerald-300">"Customer Name "</span>: [<span className="text-emerald-300">"Alice"</span>, <span className="text-emerald-300">"Bob"</span>, <span className="text-emerald-300">"Alice"</span>, <span className="text-emerald-300">"Charlie"</span>],</div>
+                    <div className="pl-4"><span className="text-emerald-300">"Annual Rev ($)"</span>: [<span className="text-amber-300">120000</span>, <span className="text-purple-400">None</span>, <span className="text-amber-300">120000</span>, <span className="text-amber-300">85000</span>],</div>
+                    <div className="pl-4"><span className="text-emerald-300">"Join Date"</span>: [<span className="text-emerald-300">"2023-01-15"</span>, <span className="text-emerald-300">"2023-03-20"</span>, <span className="text-emerald-300">"2023-01-15"</span>, <span className="text-emerald-300">"2023-06-10"</span>]</div>
+                    <div>{'}'})</div>
+                    <div className="mt-2 text-neutral-500"># 2. Clean, deduplicate, and impute in one chain</div>
                     <div><span className="text-white">clean_df</span> = (</div>
                     <div className="pl-4"><span className="text-white">raw_df</span></div>
-                    <div className="pl-4">.<span className="text-sky-300">darsh.clean_names</span>() <span className="text-neutral-500"># 'Total Rev ($)' -&gt; 'total_rev'</span></div>
-                    <div className="pl-4">.<span className="text-sky-300">darsh.drop_duplicates</span>()</div>
-                    <div className="pl-4">.<span className="text-sky-300">darsh.fill_missing</span>(<span className="text-neutral-400">strategy</span>=<span className="text-emerald-300">"smart"</span>)</div>
-                    <div className="pl-4">.<span className="text-sky-300">darsh.infer_types</span>()</div>
+                    <div className="pl-4">.<span className="text-sky-300">darsh.clean_names</span>() <span className="text-neutral-500"># 'Annual Rev ($)' -&gt; 'annual_rev'</span></div>
+                    <div className="pl-4">.<span className="text-sky-300">darsh.drop_duplicates</span>() <span className="text-neutral-500"># Removes duplicate rows</span></div>
+                    <div className="pl-4">.<span className="text-sky-300">darsh.fill_missing</span>(<span className="text-neutral-400">strategy</span>=<span className="text-emerald-300">"smart"</span>) <span className="text-neutral-500"># Imputes nulls</span></div>
+                    <div className="pl-4">.<span className="text-sky-300">darsh.infer_types</span>() <span className="text-neutral-500"># Auto cast types</span></div>
                     <div>)</div>
-                    <div className="mt-2 text-neutral-500"># Check data health rating:</div>
-                    <div><span className="text-white">score</span> = <span className="text-white">clean_df</span>.<span className="text-sky-300">darsh.quality_score</span>() <span className="text-neutral-500"># 98.4 / 100</span></div>
+                    <div className="mt-2 text-neutral-500"># 3. Check data health score (0-100)</div>
+                    <div><span className="text-white">score</span> = <span className="text-white">clean_df</span>.<span className="text-sky-300">darsh.quality_score</span>() <span className="text-neutral-500"># ~95.6 / 100</span></div>
+                    <div><span className="text-sky-300">print</span>(<span className="text-emerald-300">f"Data Health Score: &#123;score:.1f&#125; / 100"</span>)</div>
+                    <div><span className="text-sky-300">print</span>(<span className="text-white">clean_df</span>)</div>
                   </div>
                 </div>
 
@@ -1313,23 +1529,40 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
                 {/* Code Window */}
                 <div className="lg:col-span-7 rounded-2xl bg-black border border-white/[0.08] overflow-hidden">
                   <div className="px-4 py-2.5 bg-white/[0.02] border-b border-white/[0.06] flex items-center justify-between text-xs font-mono text-neutral-500">
-                    <span>app.py</span>
+                    <div className="flex items-center gap-2">
+                      <span>live_dashboard.py</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-sans">
+                        Full runnable file
+                      </span>
+                    </div>
                     <button
-                      onClick={() => copyToClipboard("app = darsh.dashboard(\n    data=df,\n    charts=[c1, c2],\n    kpis=[darsh.kpi(\"Revenue\", \"revenue\", agg=\"sum\", prefix=\"$\")],\n    title=\"Executive Portal\"\n)\napp.run(port=8080)", "doc-dash")}
-                      className="hover:text-white flex items-center gap-1.5 transition-colors"
+                      onClick={() => copyToClipboard(plainEnglishSnippets.dash, "doc-dash")}
+                      className="hover:text-white flex items-center gap-1.5 transition-colors font-sans text-xs"
                     >
                       {copiedKey === "doc-dash" ? <Check className="size-3.5 text-emerald-400" /> : <Copy className="size-3.5" />}
-                      <span>{copiedKey === "doc-dash" ? "Copied" : "Copy"}</span>
+                      <span>{copiedKey === "doc-dash" ? "Copied Full Code" : "Copy Full Code"}</span>
                     </button>
                   </div>
                   <div className="p-5 font-mono text-[13px] leading-relaxed">
+                    <div><span className="text-purple-400">import</span> <span className="text-white">darsh</span></div>
+                    <div><span className="text-purple-400">import</span> <span className="text-white">pandas</span> <span className="text-purple-400">as</span> <span className="text-white">pd</span></div>
+                    <div className="mt-2 text-neutral-500"># 1. Sample business metrics DataFrame</div>
+                    <div><span className="text-white">df</span> = <span className="text-white">pd.</span><span className="text-sky-300">DataFrame</span>({'{'}</div>
+                    <div className="pl-4"><span className="text-emerald-300">"month"</span>: [<span className="text-emerald-300">"Jan"</span>, <span className="text-emerald-300">"Feb"</span>, <span className="text-emerald-300">"Mar"</span>, <span className="text-emerald-300">"Apr"</span>, <span className="text-emerald-300">"May"</span>],</div>
+                    <div className="pl-4"><span className="text-emerald-300">"channel"</span>: [<span className="text-emerald-300">"Online"</span>, <span className="text-emerald-300">"Retail"</span>, <span className="text-emerald-300">"Online"</span>, <span className="text-emerald-300">"Retail"</span>, <span className="text-emerald-300">"Online"</span>],</div>
+                    <div className="pl-4"><span className="text-emerald-300">"revenue"</span>: [<span className="text-amber-300">42000</span>, <span className="text-amber-300">31000</span>, <span className="text-amber-300">58000</span>, <span className="text-amber-300">49000</span>, <span className="text-amber-300">63000</span>]</div>
+                    <div>{'}'})</div>
+                    <div className="mt-2 text-neutral-500"># 2. Charts for the dashboard</div>
+                    <div><span className="text-white">c1</span> = <span className="text-sky-300">darsh.line</span>(<span className="text-white">df</span>, <span className="text-neutral-400">x</span>=<span className="text-emerald-300">"month"</span>, <span className="text-neutral-400">y</span>=<span className="text-emerald-300">"revenue"</span>, <span className="text-neutral-400">title</span>=<span className="text-emerald-300">"Revenue Growth"</span>)</div>
+                    <div><span className="text-white">c2</span> = <span className="text-sky-300">darsh.bar</span>(<span className="text-white">df</span>, <span className="text-neutral-400">x</span>=<span className="text-emerald-300">"channel"</span>, <span className="text-neutral-400">y</span>=<span className="text-emerald-300">"revenue"</span>, <span className="text-neutral-400">title</span>=<span className="text-emerald-300">"Channel Breakdown"</span>)</div>
+                    <div className="mt-2 text-neutral-500"># 3. Create live reactive dashboard portal</div>
                     <div><span className="text-white">app</span> = <span className="text-sky-300">darsh.dashboard</span>(</div>
-                    <div className="pl-4"><span className="text-neutral-400">data</span>=<span className="text-white">df</span>,</div>
+                    <div className="pl-4"><span className="text-neutral-400">title</span>=<span className="text-emerald-300">"Executive Portal"</span>,</div>
                     <div className="pl-4"><span className="text-neutral-400">charts</span>=[<span className="text-white">c1, c2</span>],</div>
-                    <div className="pl-4"><span className="text-neutral-400">kpis</span>=[<span className="text-sky-300">darsh.kpi</span>(<span className="text-emerald-300">"Revenue"</span>, <span className="text-emerald-300">"revenue"</span>, <span className="text-neutral-400">agg</span>=<span className="text-emerald-300">"sum"</span>, <span className="text-neutral-400">prefix</span>=<span className="text-emerald-300">"$"</span>)],</div>
-                    <div className="pl-4"><span className="text-neutral-400">title</span>=<span className="text-emerald-300">"Executive Portal"</span></div>
+                    <div className="pl-4"><span className="text-neutral-400">data</span>=<span className="text-white">df</span>,</div>
+                    <div className="pl-4"><span className="text-neutral-400">kpis</span>=[<span className="text-sky-300">darsh.kpi</span>(<span className="text-emerald-300">"Total Revenue"</span>, <span className="text-emerald-300">"$243K"</span>, <span className="text-neutral-400">delta</span>=<span className="text-emerald-300">"+18.4%"</span>)]</div>
                     <div>)</div>
-                    <div className="mt-2 text-neutral-500"># Launches local server and opens your browser:</div>
+                    <div className="mt-2 text-neutral-500"># 4. Launches local server at localhost:8080</div>
                     <div><span className="text-white">app.</span><span className="text-sky-300">run</span>(<span className="text-neutral-400">port</span>=<span className="text-amber-300">8080</span>)</div>
                   </div>
                 </div>
