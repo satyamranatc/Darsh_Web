@@ -9,7 +9,6 @@ import {
   Check,
   Search,
   ChevronRight,
-  Sparkles,
   Sliders,
   Layers,
   Zap,
@@ -682,13 +681,11 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
       {/* APPLE-INSPIRED FROSTED GLASS HEADER */}
       {/* ========================================================================= */}
       <header className="sticky top-0 z-40 w-full backdrop-blur-2xl bg-black/75 border-b border-white/[0.08] transition-all">
-        <div className="w-full max-w-[1500px] mx-auto px-6 sm:px-10 h-16 flex items-center justify-between">
+        <div className="w-full max-w-[1240px] mx-auto px-6 sm:px-10 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <a href="#" className="flex items-center gap-2.5 group">
-              <div className="size-7 rounded-lg bg-gradient-to-tr from-indigo-500 via-sky-400 to-emerald-400 p-[1px] shadow-[0_0_14px_rgba(99,102,241,0.35)] group-hover:scale-105 transition-transform">
-                <div className="w-full h-full bg-black rounded-[7px] flex items-center justify-center">
-                  <span className="text-white text-xs font-bold font-mono">D</span>
-                </div>
+              <div className="size-7 rounded-lg bg-white/[0.08] border border-white/20 flex items-center justify-center transition-transform group-hover:scale-105">
+                <span className="text-white text-xs font-semibold font-mono">D</span>
               </div>
               <span className="font-semibold text-lg tracking-tight text-white group-hover:text-neutral-200 transition-colors">
                 Darsh
@@ -709,9 +706,9 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
             <a href="#api" className="hover:text-white transition-colors">API Explorer</a>
             <button
               onClick={() => navigateTo("guide")}
-              className="hover:text-white transition-colors flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 font-medium border border-indigo-500/20"
+              className="hover:text-white transition-colors flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/[0.05] hover:bg-white/[0.1] text-neutral-300 font-medium border border-white/[0.08]"
             >
-              <BookOpen className="size-3.5 text-indigo-400" />
+              <BookOpen className="size-3.5 text-neutral-400" />
               <span>Learning Hub</span>
             </button>
           </nav>
@@ -762,19 +759,10 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
         {/* ========================================================================= */}
         {/* APPLE-INSPIRED HERO SECTION */}
         {/* ========================================================================= */}
-        <section className="relative z-10 w-full pt-28 pb-28 sm:pt-40 sm:pb-36 px-6 sm:px-12 max-w-[1500px] mx-auto text-center flex flex-col items-center">
-        {/* Apple Dynamic Pill Badge */}
-        <div className="relative inline-flex overflow-hidden rounded-full p-[1px] mb-8 shadow-2xl group cursor-pointer hover:scale-[1.02] transition-transform">
-          <span className="absolute inset-[-1000%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#4F46E5_0%,#38BDF8_50%,#4F46E5_100%)] opacity-60" />
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-950/90 text-[12.5px] font-medium text-neutral-300 backdrop-blur-3xl border border-white/10">
-            <Sparkles className="size-3.5 text-indigo-400 animate-pulse" />
-            <span>Darsh v2.0.1 Released &middot; Now live on PyPI</span>
-            <ChevronRight className="size-3 text-neutral-500 group-hover:translate-x-0.5 transition-transform" />
-          </div>
-        </div>
+        <section className="relative z-10 w-full pt-28 pb-24 sm:pt-36 sm:pb-32 px-6 sm:px-12 max-w-[1240px] mx-auto text-center flex flex-col items-center">
 
         {/* Apple Keynote Style Monumental Headline */}
-        <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-[-0.045em] text-white mb-6 leading-[1.0] max-w-6xl">
+        <h1 className="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-[-0.045em] text-white mb-6 leading-[1.0] max-w-5xl">
           Clean data. <br />
           <span className="apple-gradient-hero">
             Calm charts.
@@ -782,13 +770,13 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
         </h1>
 
         {/* High-Elegance Breathing Subtitle */}
-        <p className="text-lg sm:text-2xl text-neutral-400 max-w-3xl mx-auto mb-14 font-normal leading-relaxed tracking-tight">
+        <p className="text-lg sm:text-xl text-neutral-400 max-w-2xl mx-auto mb-12 font-normal leading-relaxed tracking-tight">
           The modern Pythonic charting and dashboard engine. Built on top of pandas, matplotlib, and plotly with
           <span className="text-neutral-200 font-medium"> zero proprietary silos</span> and effortless 1-liners.
         </p>
 
         {/* Action Button Row */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-lg mb-20">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-lg mb-16">
           <button
             onClick={() => copyToClipboard("pip install --upgrade darsh", "hero-pip", "Copied to clipboard: pip install darsh")}
             className="w-full sm:w-auto h-12 px-8 rounded-full bg-white hover:bg-neutral-100 text-black font-semibold text-[14px] flex items-center justify-center gap-2.5 transition-all shadow-[0_4px_24px_rgba(255,255,255,0.18)] apple-pill-btn"
@@ -810,29 +798,29 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
             onClick={() => navigateTo("guide")}
             className="w-full sm:w-auto h-12 px-8 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-white font-medium text-[14px] border border-white/[0.12] flex items-center justify-center gap-2.5 transition-all group backdrop-blur-xl apple-pill-btn"
           >
-            <BookOpen className="size-4 text-indigo-400" />
+            <BookOpen className="size-4 text-neutral-400 group-hover:text-white transition-colors" />
             <span>Masterpiece Guide</span>
             <ChevronRight className="size-4 text-neutral-400 group-hover:translate-x-0.5 transition-transform" />
           </button>
         </div>
 
         {/* Apple-grade Specular Metrics Ticker */}
-        <div className="w-full max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 border-t border-white/[0.08] text-center">
+        <div className="w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 border-t border-white/[0.08] text-center">
           <div className="p-6 rounded-2xl apple-card apple-card-hover relative overflow-hidden group">
-            <div className="text-3xl font-bold text-white tracking-tight group-hover:scale-105 transition-transform">1-Line</div>
-            <div className="text-[12px] text-neutral-400 mt-1 font-medium">Lists, dicts, arrays</div>
+            <div className="text-3xl font-semibold text-white tracking-tight">1-Line</div>
+            <div className="text-[12px] text-neutral-400 mt-1 font-normal">Lists, dicts, arrays</div>
           </div>
           <div className="p-6 rounded-2xl apple-card apple-card-hover relative overflow-hidden group">
-            <div className="text-3xl font-bold text-indigo-300 tracking-tight group-hover:scale-105 transition-transform">100%</div>
-            <div className="text-[12px] text-neutral-400 mt-1 font-medium">Native Axes & Figures</div>
+            <div className="text-3xl font-semibold text-white tracking-tight">100%</div>
+            <div className="text-[12px] text-neutral-400 mt-1 font-normal">Native Axes &amp; Figures</div>
           </div>
           <div className="p-6 rounded-2xl apple-card apple-card-hover relative overflow-hidden group">
-            <div className="text-3xl font-bold text-emerald-300 tracking-tight group-hover:scale-105 transition-transform">0</div>
-            <div className="text-[12px] text-neutral-400 mt-1 font-medium">Proprietary silos</div>
+            <div className="text-3xl font-semibold text-white tracking-tight">0</div>
+            <div className="text-[12px] text-neutral-400 mt-1 font-normal">Proprietary silos</div>
           </div>
           <div className="p-6 rounded-2xl apple-card apple-card-hover relative overflow-hidden group">
-            <div className="text-3xl font-bold text-sky-300 tracking-tight group-hover:scale-105 transition-transform">36/36</div>
-            <div className="text-[12px] text-neutral-400 mt-1 font-medium">Pytest unit suite passing</div>
+            <div className="text-3xl font-semibold text-white tracking-tight">36/36</div>
+            <div className="text-[12px] text-neutral-400 mt-1 font-normal">Pytest suite passing</div>
           </div>
         </div>
       </section>
@@ -840,12 +828,8 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
       {/* ========================================================================= */}
       {/* INTERACTIVE PLAYGROUND CANVAS (WITH MAC CONTROLS & LIVE HOVER) */}
       {/* ========================================================================= */}
-      <section id="playground" className="relative z-10 w-full py-28 px-6 sm:px-12 max-w-[1500px] mx-auto">
+      <section id="playground" className="relative z-10 w-full py-28 px-6 sm:px-12 max-w-[1240px] mx-auto">
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs text-neutral-400 mb-3">
-            <Sliders className="size-3 text-indigo-400" />
-            <span>Interactive Studio Canvas</span>
-          </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.035em] text-white mb-4">
             Designed for clarity
           </h2>
@@ -1461,16 +1445,13 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
       {/* ========================================================================= */}
       {/* PHILOSOPHY & CORE MANIFESTO (APPLE KEYNOTE MANIFESTO) */}
       {/* ========================================================================= */}
-      <section id="philosophy" className="relative z-10 w-full py-32 px-6 sm:px-12 max-w-[1500px] mx-auto text-center border-t border-white/[0.08]">
-        <div className="max-w-4xl mx-auto">
-          <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-indigo-400 mb-4">
-            Core Manifesto
-          </span>
-          <blockquote className="text-3xl sm:text-6xl font-bold tracking-[-0.035em] text-white leading-tight mb-8">
+      <section id="philosophy" className="relative z-10 w-full py-32 px-6 sm:px-12 max-w-[1240px] mx-auto text-center border-t border-white/[0.08]">
+        <div className="max-w-3xl mx-auto mb-16">
+          <blockquote className="text-3xl sm:text-5xl font-bold tracking-[-0.035em] text-white leading-tight mb-6">
             &ldquo;Extremely simple on the surface. <br />
             <span className="text-neutral-500 font-normal">Extremely powerful underneath.&rdquo;</span>
           </blockquote>
-          <p className="text-base sm:text-lg text-neutral-400 leading-relaxed font-normal max-w-2xl mx-auto mb-16">
+          <p className="text-base sm:text-lg text-neutral-400 leading-relaxed font-normal max-w-2xl mx-auto">
             The developer should not feel like they are wrestling FastAPI, Pandas, SVG, JavaScript, CSS, or a charting engine.
             All complexity disappears behind an intuitive, elegant Darsh API.
           </p>
@@ -1502,13 +1483,9 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
       {/* ========================================================================= */}
       {/* APPLE BENTO GRID: ARCHITECTURE & ENGINEERING ADVANTAGES (#advantages) */}
       {/* ========================================================================= */}
-      <section id="advantages" className="relative z-10 w-full py-32 px-6 sm:px-12 max-w-[1500px] mx-auto border-t border-white/[0.08]">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[12px] text-neutral-300 mb-4">
-            <Cpu className="size-3.5 text-sky-400" />
-            <span>Architecture &amp; Engineering</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.035em] text-white mb-4">
+      <section id="advantages" className="relative z-10 w-full py-32 px-6 sm:px-12 max-w-[1240px] mx-auto border-t border-white/[0.08]">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.035em] text-white mb-4">
             Engineered for zero friction
           </h2>
           <p className="text-base sm:text-lg text-neutral-400 leading-relaxed font-normal max-w-2xl mx-auto">
@@ -1517,12 +1494,11 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {/* Bento Card 1 (Large 2-col) */}
-          <div className="md:col-span-2 p-8 sm:p-10 rounded-3xl bg-[#08080a] border border-white/[0.08] relative overflow-hidden apple-glass-hover flex flex-col justify-between">
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent" />
+          <div className="md:col-span-2 p-8 sm:p-10 rounded-2xl apple-card apple-card-hover relative overflow-hidden flex flex-col justify-between">
             <div>
-              <div className="size-10 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-5">
+              <div className="size-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-neutral-300 mb-5">
                 <Layers className="size-5" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-3">
@@ -1534,15 +1510,14 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
             </div>
             <div className="p-4 rounded-xl bg-black border border-white/[0.06] font-mono text-xs text-neutral-400 flex items-center justify-between">
               <span>assert isinstance(ax, matplotlib.axes.Axes)</span>
-              <span className="text-emerald-400 font-semibold">True ✓</span>
+              <span className="text-white font-semibold">True ✓</span>
             </div>
           </div>
 
           {/* Bento Card 2 */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#08080a] border border-white/[0.08] relative overflow-hidden apple-glass-hover flex flex-col justify-between">
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-500/40 to-transparent" />
+          <div className="p-8 sm:p-10 rounded-2xl apple-card apple-card-hover relative overflow-hidden flex flex-col justify-between">
             <div>
-              <div className="size-10 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 mb-5">
+              <div className="size-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-neutral-300 mb-5">
                 <Eye className="size-5" />
               </div>
               <h3 className="text-xl font-bold text-white tracking-tight mb-2">
@@ -1557,7 +1532,7 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
                 <div
                   key={hex}
                   onClick={() => copyToClipboard(hex, `hex-${hex}`, `Copied ${hex}`)}
-                  className="size-7 rounded-full cursor-pointer hover:scale-110 transition-transform border border-white/20"
+                  className="size-6 rounded-full cursor-pointer hover:scale-110 transition-transform border border-white/20"
                   style={{ backgroundColor: hex }}
                   title={`Click to copy ${hex}`}
                 />
@@ -1566,10 +1541,9 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
           </div>
 
           {/* Bento Card 3 */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#08080a] border border-white/[0.08] relative overflow-hidden apple-glass-hover flex flex-col justify-between">
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent" />
+          <div className="p-8 sm:p-10 rounded-2xl apple-card apple-card-hover relative overflow-hidden flex flex-col justify-between">
             <div>
-              <div className="size-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-5">
+              <div className="size-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-neutral-300 mb-5">
                 <Zap className="size-5" />
               </div>
               <h3 className="text-xl font-bold text-white tracking-tight mb-2">
@@ -1579,21 +1553,20 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
                 Local dashboard servers compile to high-speed async endpoints, serving interactive SVG updates under 5ms.
               </p>
             </div>
-            <div className="pt-4 text-xs font-mono text-emerald-400 flex items-center gap-1.5">
-              <span className="size-2 rounded-full bg-emerald-400" />
+            <div className="pt-4 text-xs font-mono text-neutral-300 flex items-center gap-2">
+              <span className="size-2 rounded-full bg-white/60" />
               <span>Sub-5ms WebSocket stream latency</span>
             </div>
           </div>
 
           {/* Bento Card 4 (Large 2-col) */}
-          <div className="md:col-span-2 p-8 sm:p-10 rounded-3xl bg-[#08080a] border border-white/[0.08] relative overflow-hidden apple-glass-hover flex flex-col justify-between">
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent" />
+          <div className="md:col-span-2 p-8 sm:p-10 rounded-2xl apple-card apple-card-hover relative overflow-hidden flex flex-col justify-between">
             <div>
-              <div className="size-10 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-5">
+              <div className="size-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-neutral-300 mb-5">
                 <ShieldCheck className="size-5" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-3">
-                Auditable DataFrame Accessors (<code className="text-indigo-300">df.darsh.*</code>)
+                Auditable DataFrame Accessors (<code className="text-neutral-200">df.darsh.*</code>)
               </h3>
               <p className="text-sm text-neutral-400 leading-relaxed max-w-xl mb-6">
                 Clean and profile without breaking pandas workflows. Chain snake_case naming, mode/median imputation, and compute reproducible 0-100 hygiene ratings with full transparency.
@@ -1602,15 +1575,15 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
             <div className="grid grid-cols-3 gap-3 font-mono text-xs">
               <div className="p-3 rounded-xl bg-black border border-white/[0.06]">
                 <div className="text-neutral-500 text-[10px]">VECTORIZED</div>
-                <div className="text-white font-bold">1M+ rows/s</div>
+                <div className="text-white font-semibold">1M+ rows/s</div>
               </div>
               <div className="p-3 rounded-xl bg-black border border-white/[0.06]">
                 <div className="text-neutral-500 text-[10px]">DETERMINISTIC</div>
-                <div className="text-emerald-400 font-bold">100% Auditable</div>
+                <div className="text-white font-semibold">100% Auditable</div>
               </div>
               <div className="p-3 rounded-xl bg-black border border-white/[0.06]">
                 <div className="text-neutral-500 text-[10px]">UNIT SUITE</div>
-                <div className="text-sky-300 font-bold">36/36 Passing</div>
+                <div className="text-white font-semibold">36/36 Passing</div>
               </div>
             </div>
           </div>
@@ -1620,15 +1593,10 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
       {/* ========================================================================= */}
       {/* "HOW TO USE DARSH IN PLAIN ENGLISH" (FULL RUNNABLE SCRIPTS WITH SAMPLE DATA) */}
       {/* ========================================================================= */}
-      <section id="docs" className="relative z-10 w-full py-32 px-6 sm:px-12 max-w-[1500px] mx-auto border-t border-white/[0.08]">
+      <section id="docs" className="relative z-10 w-full py-32 px-6 sm:px-12 max-w-[1240px] mx-auto border-t border-white/[0.08]">
         {/* Section Header */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[12px] text-neutral-300 mb-4">
-            <span className="size-1.5 rounded-full bg-emerald-400" />
-            <span>Hyper-Easy Guide &middot; For Beginners and Senior Developers</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.035em] text-white mb-4">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.035em] text-white mb-4">
             How to use Darsh in plain English
           </h2>
 
@@ -2318,13 +2286,9 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
       {/* ========================================================================= */}
       {/* SEARCHABLE API REFERENCE EXPLORER (#api) */}
       {/* ========================================================================= */}
-      <section id="api" className="relative z-10 w-full py-32 px-6 sm:px-12 max-w-[1500px] mx-auto border-t border-white/[0.08]">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[12px] text-neutral-300 mb-4">
-            <Code2 className="size-3.5 text-indigo-400" />
-            <span>Interactive Reference</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.035em] text-white mb-4">
+      <section id="api" className="relative z-10 w-full py-32 px-6 sm:px-12 max-w-[1240px] mx-auto border-t border-white/[0.08]">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.035em] text-white mb-4">
             API Explorer
           </h2>
           <p className="text-base sm:text-lg text-neutral-400 leading-relaxed font-normal max-w-2xl mx-auto mb-8">
@@ -2440,7 +2404,7 @@ app.run(port=8080)  # High-speed FastAPI + SVG engine`,
       {/* APPLE-INSPIRED FOOTER */}
       {/* ========================================================================= */}
       <footer className="relative z-10 w-full border-t border-white/[0.08] py-16 px-6 sm:px-12 bg-black">
-        <div className="w-full max-w-[1500px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-neutral-500">
+        <div className="w-full max-w-[1240px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-neutral-500">
           <div className="flex items-center gap-2">
             <span className="font-semibold text-white">Darsh</span>
             <span>&middot;</span>

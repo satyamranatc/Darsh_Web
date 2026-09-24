@@ -491,18 +491,14 @@ fig_3d.show()`
     : datasets.filter((d) => d.level === parseInt(activeLevel));
 
   return (
-    <section id="datasets" className="relative z-10 w-full py-32 px-6 sm:px-12 max-w-[1500px] mx-auto border-t border-white/[0.08]">
+    <section id="datasets" className="relative z-10 w-full py-32 px-6 sm:px-12 max-w-[1240px] mx-auto border-t border-white/[0.08]">
       {/* Header */}
-      <div className="max-w-4xl mx-auto text-center mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[12px] text-neutral-300 mb-4">
-          <GraduationCap className="size-3.5 text-emerald-400" />
-          <span>Hands-on Data Academy &middot; Levels 1 to 3</span>
-        </div>
-        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.035em] text-white mb-5">
-          Curated Practice Datasets for DA & Data Science
+      <div className="max-w-3xl mx-auto text-center mb-16">
+        <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.035em] text-white mb-4">
+          Curated Practice Datasets
         </h2>
         <p className="text-base sm:text-lg text-neutral-400 leading-relaxed font-normal max-w-2xl mx-auto mb-8">
-          Designed specifically for students, self-learners, and analysts. Download real-world CSVs, master data cleaning with <code className="text-indigo-400 font-mono text-sm px-1.5 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20">df.darsh.*</code>, and produce publication-ready charts in 1 line.
+          Real-world datasets engineered for analysts and data scientists. Master cleaning with <code className="text-neutral-200 font-mono text-sm px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08]">df.darsh.*</code> and produce native publication figures in 1 line.
         </p>
 
         {/* Level Filter Tabs */}
